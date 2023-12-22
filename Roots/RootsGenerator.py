@@ -11,7 +11,7 @@ project_directory = os.path.abspath(os.path.join(script_directory, ".."))
 sys.path.append(project_directory)
 
 # Now, you can import from AbstractClasses
-from AbstractClasses.AbstractGenerator import AbstractGenerator
+from AbstractClasses import AbstractGenerator
 import random
 
 class RootsGenerator(AbstractGenerator):
