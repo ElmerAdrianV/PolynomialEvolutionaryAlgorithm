@@ -11,9 +11,12 @@ project_directory = os.path.abspath(os.path.join(script_directory, ".."))
 sys.path.append(project_directory)
 
 from AbstractClasses import AbstractGenerator
+from Roots import RootsGenerator
+from Coefficients import CoefficientsGenerator
 import Polynomial
+
 class PolynomialsGenerator(AbstractGenerator):
-    def __init__(self, chromosomeType, heuristicType):
+    def __init__(self, chromosome_type="Roots", heuristic_type="Random"):
         """
             Class generator of a population of polynomials with a given chromosome type and heuristic type
             Input:
@@ -23,8 +26,14 @@ class PolynomialsGenerator(AbstractGenerator):
                 heuristicType: type of heuristic to use between the following options:
                 
         """
-        self.chromosomeType = chromosomeType
-        self.heuristicType = heuristicType
+        self.chromosome_type = chromosome_type
+
+        if chromosome_type == "Roots":
+            self.chromosome_generator = RootsGenerator()
+        elif chromosome_type == "Coefficients":
+            self.chromosome_generator = CoefficientsGenerator()
+        
+        self.heuristicType = heuristic_type
 
     def generates(self, count):
         """
@@ -45,5 +54,6 @@ class PolynomialsGenerator(AbstractGenerator):
         """
             Generates a polynomial with the given chromosome type and heuristic type
         """
-        return  Polynomial(self.chromosomeType, self.heuristicType)
+        chromosomes = self.chromosome_generator.generate()
+        return  Polynomial(self.chromosome_type,chromosomes, self.heuristic_type)
         
