@@ -1,4 +1,17 @@
-# Path: AlgoritmoEvolutivoPolinomios/v1/coeficientes/CoefficientGenerator.py
+import sys
+import os
+
+# Get the current script's directory (CoefficientssGenerator.py's directory)
+script_directory = os.path.dirname(os.path.realpath(__file__))
+
+# Calculate the project directory path by going up one level from the script directory
+project_directory = os.path.abspath(os.path.join(script_directory, ".."))
+
+# Add the project directory to the Python path
+sys.path.append(project_directory)
+
+
+from AbstractClasses import AbstractGenerator
 import numpy as np
 import random
 import threading
@@ -33,7 +46,7 @@ class Generator_Coefficients_Thread(threading.Thread):
                     f.write('\n')
 
 
-class CoefficientGenerator:
+class CoefficientDatabaseGenerator(AbstractGenerator):
     def __init__(self, num_threads=4, coefficients_per_thread=100000, degree=4):
         """
         Initialize the coefficient generator.
@@ -46,7 +59,7 @@ class CoefficientGenerator:
         self.coefficients_per_thread = coefficients_per_thread
         self.degree = degree
 
-    def generate_coefficients(self):
+    def generate(self):
         # Create and start threads
         threads = []
         for _ in range(self.num_threads):
@@ -63,7 +76,7 @@ class CoefficientGenerator:
 
 if __name__ == "__main__":
     start_time = time.time()
-    generator = CoefficientGenerator(num_threads=16, coefficients_per_thread=500000, degree=4)
+    generator = CoefficientDatabaseGenerator(num_threads=16, coefficients_per_thread=500000, degree=4)
     generator.generate_coefficients()
     end_time = time.time()
     elapsed_time = end_time - start_time
