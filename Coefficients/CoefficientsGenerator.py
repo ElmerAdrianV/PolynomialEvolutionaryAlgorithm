@@ -15,7 +15,7 @@ sys.path.append(project_directory)
 import random
 import csv
 import numpy as np
-from AbstractClasses import AbstractGenerator
+from AbstractClasses.AbstractGenerator import AbstractGenerator
 
 class CoefficientsGenerator(AbstractGenerator):
     def __init__(self, root_dir="/Users/elmeradrianv/dogfood/AlgoritmoEvolutivoPolinomios/v1/coefficients/", length_database=400000, degree=4):
@@ -49,7 +49,8 @@ class CoefficientsGenerator(AbstractGenerator):
             k = random.randint(1, self.length_database)
             coefficient = self.get_coefficient(k, self.coef_files[file_number - 1])
             coefficients.append(coefficient)
-        return coefficients
+        ## Add the coefficient of the highest degree and the independent coefficient
+        return [1]+coefficients+[0]
 
     def get_coefficient(self, k, coef_file):
         """

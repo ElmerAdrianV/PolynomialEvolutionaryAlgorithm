@@ -11,7 +11,7 @@ project_directory = os.path.abspath(os.path.join(script_directory, ".."))
 sys.path.append(project_directory)
 
 # Now, you can import from AbstractClasses
-from AbstractClasses import AbstractGenerator
+from AbstractClasses.AbstractGenerator import AbstractGenerator
 import random
 
 class RootsGenerator(AbstractGenerator):
@@ -31,8 +31,6 @@ class RootsGenerator(AbstractGenerator):
         Output:
             A list of roots. It's suppose that one of the roots is 0, to h so the list will have degree -1 elements.
         """
-        return [random.randint(self.limit_inf, self.limit_sup) for _ in range(self.degree-1)]
+        # Add 0 as a root
+        return [0]+[random.randint(self.limit_inf, self.limit_sup) for _ in range(self.degree-1)]
 
-if __name__ == "__main__":
-    roots_generator = RootsGenerator()
-    print(roots_generator.generate())
