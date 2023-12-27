@@ -55,5 +55,5 @@ class PolynomialsGenerator(AbstractGenerator):
             Generates a polynomial with the given chromosome type and heuristic type
         """
         chromosomes = self.chromosome_generator.generate()
-        return  Polynomial(self.chromosome_type,chromosomes, self.heuristic_type)
+        return  Polynomial(self.heuristic_type, self.chromosome_type,chromosomes)
         
