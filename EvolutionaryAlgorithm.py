@@ -16,7 +16,7 @@ from Polynomials.PolynomialsGenerator import PolynomialsGenerator
 from Polynomials.Polynomial import Polynomial
 
 class PolynomialEvolutionaryAlgorithm:
-    def __init__(self, n,  chromosome_type="Roots", heuristic_type="HVSymetry"):
+    def __init__(self, n,  chromosome_type="Roots", heuristic_type="HVSymetry", degree=4):
         self.n = n
         self.population = []
         self.best_fitness = 0
@@ -24,7 +24,8 @@ class PolynomialEvolutionaryAlgorithm:
         self.best_type = None
         self.chromosome_type = chromosome_type
         self.heuristic_type = heuristic_type
-        self.polynomial_generator = PolynomialsGenerator(chromosome_type,heuristic_type)
+        self.degree = degree
+        self.polynomial_generator = PolynomialsGenerator(chromosome_type,heuristic_type, degree)
         pre_population = self.polynomial_generator.generates(n)
         for polynomial in pre_population:
             self.population.append([polynomial.global_fitness, polynomial.chromosomes, "Original"])
@@ -34,9 +35,15 @@ class PolynomialEvolutionaryAlgorithm:
         return p.global_fitness
 
     def mutate(self, chromosomes):
-        for i in range(4):
+        
+        if self.chromosome_type == "Roots":
+            mutate_range = range(0,self.degree)
+        else:
+            mutate_range = range(1,self.degree)
+
+        for i in mutate_range:
             if random.random() < 0.2:
-                chromosomes[i] = random.uniform(-100, 100)
+                chromosomes[i] = self.chromosome_generator.generate_chromosome()
         return chromosomes
 
     def crossover(self, chromosomes1, chromosomes2):
