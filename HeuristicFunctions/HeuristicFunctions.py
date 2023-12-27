@@ -28,7 +28,7 @@ class HeuristicFunctions:
         interval_width=(polynomial.x_values[-1]-polynomial.x_values[0])*0.25
         
         # Find the equation of the derivative of the polynomial:
-        deriv=poly.polynomial.polyder(polynomial.coefficients)
+        deriv=poly.polynomial.polyder(polynomial.coefficients[::-1])
         
         # Find the roots of the derivative, thus finding the x-values at
         # which the original polynomial reaches a local minimum or

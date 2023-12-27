@@ -21,7 +21,7 @@ from HeuristicFunctions.HeuristicFunctions import HeuristicFunctions
 import numpy as np
 
 class Polynomial(AbstractPolynomial):
-    def __init__(self, heuristic_type="HVSymetry", chromosome_type="Roots", chromosomes=[], degree=4, ):
+    def __init__(self, heuristic_type="HVSymetry", chromosome_type="Roots", chromosomes=[], degree=4 ):
         self.degree = degree
         self.chromosome_type = chromosome_type
         self.chromosomes = chromosomes
