@@ -23,7 +23,7 @@ class PolynomialEvolutionaryAlgorithm:
         self.best_polynomial = None
         self.best_type = None
         self.polynomial_generator = PolynomialsGenerator()
-        self.population = self.polynomial_generator.generate(n)
+        self.population = self.polynomial_generator.generates(n)
         
     def evaluate(self, chromosomes):
         p = Polynomial(chromosomes)
