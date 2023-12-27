@@ -64,14 +64,14 @@ class HeuristicFunctions:
         # corresponding to the local minima/maxima:
         y_roots=[]
         for r in roots:
-            y_roots.append(self.polyn(r))
+            y_roots.append(polynomial.polynomial_function_evaluate(r))
         # Find the y-values of the original polynomial at the extreme
         # x-values of the part of the polynomial being considered, and
         # then find the minimum and maximum y-values present in that
         # part of the polynomial, in order to find the height of the
         # part of the polynomial being considered:
-        y_val_left=self.polyn(polynomial.x_values[0])
-        y_val_right=self.polyn(polynomial.x_values[-1])
+        y_val_left=polynomial.polynomial_function_evaluate(polynomial.x_values[0])
+        y_val_right=polynomial.polynomial_function_evaluate(polynomial.x_values[-1])
         max_y=max(y_val_left,y_val_right)
         min_y=min(y_roots)
         interval_height=max_y-min_y
