@@ -35,7 +35,6 @@ class PolynomialEvolutionaryAlgorithm:
         return p.global_fitness
 
     def mutate(self, chromosomes):
-        
         if self.chromosome_type == "Roots":
             mutate_range = range(0,self.degree)
         else:
@@ -47,7 +46,12 @@ class PolynomialEvolutionaryAlgorithm:
         return chromosomes
 
     def crossover(self, chromosomes1, chromosomes2):
-        split_index = random.randint(1, 3)
+        if self.chromosome_type == "Roots":
+            split_index = random.randint(1, self.degree-1)
+        else: 
+            # Coefficients, suppose that the last coefficient is the constant 0 
+            # and the first coefficient is the coefficient of the highest degree equals to 1
+            split_index = random.randint(2, self.degree-2)
         new_chromosomes = chromosomes1[:split_index] + chromosomes2[split_index:]
         return new_chromosomes
 
