@@ -16,18 +16,20 @@ from Polynomials.PolynomialsGenerator import PolynomialsGenerator
 from Polynomials.Polynomial import Polynomial
 
 class PolynomialEvolutionaryAlgorithm:
-    def __init__(self, n):
+    def __init__(self, n,  chromosome_type="Roots", heuristic_type="HVSymetry"):
         self.n = n
         self.population = []
         self.best_fitness = 0
         self.best_polynomial = None
         self.best_type = None
-        self.polynomial_generator = PolynomialsGenerator()
-        self.population = self.polynomial_generator.generates(n)
+        self.polynomial_generator = PolynomialsGenerator(chromosome_type,heuristic_type)
+        pre_population = self.polynomial_generator.generates(n)
+        for polynomial in pre_population:
+            self.population.append([polynomial.global_fitness, polynomial.chromosomes, "Original"])
         
     def evaluate(self, chromosomes):
         p = Polynomial(chromosomes)
-        return p.evaluate
+        return p.evaluate()
 
     def mutate(self, chromosomes):
         for i in range(4):
