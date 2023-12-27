@@ -15,10 +15,16 @@ from HeuristicFunctions.HeuristicFunctions import HeuristicFunctions
 import numpy as np
 
 class Polynomial(AbstractPolynomial):
-    def __init__(self, heuristic_type, chromosome_type="Roots", chromosomes=None, degree=4, ):
+    def __init__(self, heuristic_type, chromosome_type="Roots", chromosomes=[], degree=4, ):
         self.degree = degree
         self.chromosome_type = chromosome_type
         self.chromosomes = chromosomes
+    
+        if self.chromosome_type == "Roots":
+            self.coefficients = np.poly(self.chromosomes)
+        else:
+            self.coefficients = self.chromosomes.copy()
+
         self.heuristic_type = heuristic_type
         self.heuristic_function = HeuristicFunctions(heuristic_type)
         self.global_fitness = 0
@@ -36,27 +42,31 @@ class Polynomial(AbstractPolynomial):
         # If the polynomial degree is smaller than or equal to 1, the
         # limits will automatically be set to (-15,15), or to a
         # displacement by these amounts from the root, respectively:
-        if len(self.roots)==0:
+        if self.chromosome_type == "Roots":
+            if len(self.chromosomes)==0:
+                low_lim=-15
+                upp_lim=15
+            elif len(self.chromosomes)==1:
+                low_lim=self.chromosomes[0]-15
+                upp_lim=self.chromosomes[0]+15
+            # Otherwise the limits will be set according to the smallest and
+            # highest roots (plus/minus a displacement of 10% of the
+            # difference):
+            else:
+                smallest=min(self.chromosomes)
+                largest=max(self.chromosomes)
+                if largest - smallest > 10**-5: 
+                    diff=largest-smallest
+                else:
+                    diff = largest
+                low_lim=smallest-diff*0.1
+                upp_lim=largest+diff*0.1
+        else:
             low_lim=-15
             upp_lim=15
-        elif len(self.roots)==1:
-            low_lim=self.roots[0]-15
-            upp_lim=self.roots[0]+15
-        # Otherwise the limits will be set according to the smallest and
-        # highest roots (plus/minus a displacement of 10% of the
-        # difference):
-        else:
-            smallest=min(self.roots)
-            largest=max(self.roots)
-            if largest - smallest > 10**-5: 
-                diff=largest-smallest
-            else:
-                diff = largest
-            low_lim=smallest-diff*0.1
-            upp_lim=largest+diff*0.1
-        # Creates a list of 50 evenly-spaced x-values between the two
+        # Creates a list of 1000 evenly-spaced x-values between the two
         # specified limits:
-        x_values=np.linspace(low_lim,upp_lim)
+        x_values=np.linspace(low_lim,upp_lim, 1000)
         y_values=[]
         for x in x_values:
             y_values.append(self.polynomial_function_evaluate(x))
