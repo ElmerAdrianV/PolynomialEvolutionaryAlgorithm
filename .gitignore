@@ -1,3 +1,4 @@
 # Hiding the coefficient database
 Coefficients/coef*.csv
 **/__pycache__/
+dogfood.ipynb
