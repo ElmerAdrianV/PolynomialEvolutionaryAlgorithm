@@ -35,12 +35,8 @@ class PolynomialEvolutionaryAlgorithm:
         return p.global_fitness
 
     def mutate(self, chromosomes):
-        if self.chromosome_type == "Roots":
-            mutate_range = range(0,self.degree)
-        else:
-            mutate_range = range(1,self.degree)
 
-        for i in mutate_range:
+        for i in  range(1,self.degree):
             if random.random() < 0.2:
                 chromosomes[i] = self.polynomial_generator.generate_chromosome(i)
         return chromosomes

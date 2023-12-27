@@ -11,7 +11,21 @@ class HeuristicFunctions:
         """
         if self.heuristic_type == "HVSymetry":
             return self.HorizontalVerticalSymetry(polynomial)
+        elif self.heuristic_type == "SymetryByParity":
+            return self.SymetryByParity(polynomial)
     
+    def SymetryByParity(self, polynomial):
+        """
+            Given a polynomial, measure its symmetry by parity, i.e., p(-x) = p(x), assuming that the 
+            polynomial is symmetric about 0.
+        """
+        err_rel = 0
+        for i in range(len(polynomial.x_values)//2):
+            err_rel += abs((polynomial.y_values[i]-polynomial.y_values[-i])/polynomial.y_values[i])
+
+        return 1-err_rel/len(polynomial.x_values)
+            
+
     def HorizontalVerticalSymetry(self, polynomial):
         ''' TODO 1: Check that the vertical values are not larger than the x-values
                 and give lower fitness if they are
@@ -89,4 +103,3 @@ class HeuristicFunctions:
         global_quality=(x_quality+y_quality)/2
             
         return global_quality
-        
