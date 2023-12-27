@@ -32,5 +32,5 @@ class RootsGenerator(AbstractGenerator):
             A list of roots. It's suppose that one of the roots is 0, to h so the list will have degree -1 elements.
         """
         # Add 0 as a root
-        return [0]+[random.randint(self.limit_inf, self.limit_sup) for _ in range(self.degree-1)]
+        return [0]+[random.uniform(self.limit_inf, self.limit_sup) for _ in range(self.degree-1)]
 
