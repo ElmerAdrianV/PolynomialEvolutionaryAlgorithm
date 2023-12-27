@@ -15,9 +15,9 @@ sys.path.append(project_directory)
 import random
 import csv
 import numpy as np
-from AbstractClasses.AbstractGenerator import AbstractGenerator
+from AbstractClasses.ChromosomeGenerator import ChromosomeGenerator
 
-class CoefficientsGenerator(AbstractGenerator):
+class CoefficientsGenerator(ChromosomeGenerator):
     def __init__(self, root_dir="/Users/elmeradrianv/dogfood/AlgoritmoEvolutivoPolinomios/v1/coefficients/", length_database=400000, degree=4):
         """
         Initialize the coefficient generator.
@@ -51,6 +51,16 @@ class CoefficientsGenerator(AbstractGenerator):
             coefficients.append(coefficient)
         ## Add the coefficient of the highest degree and the independent coefficient
         return [1]+coefficients+[0]
+    def generate_chromosome(self, i):
+        """
+        Generate a set of coefficients from the coefficient files.
+        Output:
+            A list of coefficients. It's suppose that one of the
+            indepent coefficients is 0, so the list will have degree -1 elements.
+        """
+        k = random.randint(1, self.length_database)
+        return self.get_coefficient(k, self.coef_files[i-1])
+        
 
     def get_coefficient(self, k, coef_file):
         """

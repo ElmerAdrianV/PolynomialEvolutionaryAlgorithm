@@ -16,7 +16,7 @@ from Coefficients.CoefficientsGenerator import CoefficientsGenerator
 from Polynomials.Polynomial import Polynomial
 
 class PolynomialsGenerator(AbstractGenerator):
-    def __init__(self, chromosome_type="Roots", heuristic_type="HVSymetry"):
+    def __init__(self, chromosome_type="Roots", heuristic_type="HVSymetry", degree = 4):
         """
             Class generator of a population of polynomials with a given chromosome type and heuristic type
             Input:
@@ -27,7 +27,7 @@ class PolynomialsGenerator(AbstractGenerator):
                 
         """
         self.chromosome_type = chromosome_type
-
+        self.degree = degree
         if chromosome_type == "Roots":
             self.chromosome_generator = RootsGenerator()
         elif chromosome_type == "Coefficients":
@@ -56,4 +56,9 @@ class PolynomialsGenerator(AbstractGenerator):
         """
         chromosomes = self.chromosome_generator.generate()
         return  Polynomial(self.heuristic_type, self.chromosome_type,chromosomes)
+    def generate_chromosome(self, i):
+        """
+            Generates a chromosome with the given chromosome type
+        """
+        return self.chromosome_generator.generate_chromosome(i)
         

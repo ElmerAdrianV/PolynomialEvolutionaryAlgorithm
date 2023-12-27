@@ -42,7 +42,7 @@ class PolynomialEvolutionaryAlgorithm:
 
         for i in mutate_range:
             if random.random() < 0.2:
-                chromosomes[i] = self.chromosome_generator.generate_chromosome()
+                chromosomes[i] = self.polynomial_generator.generate_chromosome(i)
         return chromosomes
 
     def crossover(self, chromosomes1, chromosomes2):

@@ -11,10 +11,10 @@ project_directory = os.path.abspath(os.path.join(script_directory, ".."))
 sys.path.append(project_directory)
 
 # Now, you can import from AbstractClasses
-from AbstractClasses.AbstractGenerator import AbstractGenerator
+from AbstractClasses.ChromosomeGenerator import ChromosomeGenerator
 import random
 
-class RootsGenerator(AbstractGenerator):
+class RootsGenerator(ChromosomeGenerator):
     def __init__(self, limit_inf=-10, limit_sup=10, degree=4):
         """
         Initialize the roots generator.
@@ -33,4 +33,5 @@ class RootsGenerator(AbstractGenerator):
         """
         # Add 0 as a root
         return [0]+[random.uniform(self.limit_inf, self.limit_sup) for _ in range(self.degree-1)]
-
+    def generate_chromosome(self, i):
+        return random.uniform(self.limit_inf, self.limit_sup)
