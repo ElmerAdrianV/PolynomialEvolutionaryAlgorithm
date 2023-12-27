@@ -1,6 +1,19 @@
+import sys
+import os
+
+# Get the current script's directory 
+script_directory = os.path.dirname(os.path.realpath(__file__))
+
+# Calculate the project directory path by going up one level from the script directory
+project_directory = os.path.abspath(os.path.join(script_directory, ".."))
+
+# Add the project directory to the Python path
+sys.path.append(project_directory)
+
+# imports
 import random
-from Polynomials import PolynomialsGenerator
-from Polynomials import Polynomial
+from Polynomials.PolynomialsGenerator import PolynomialsGenerator
+from Polynomials.Polynomial import Polynomial
 
 class PolynomialEvolutionaryAlgorithm:
     def __init__(self, n):

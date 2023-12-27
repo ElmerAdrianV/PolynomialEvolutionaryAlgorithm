@@ -1,4 +1,4 @@
-import EvolutionaryAlgorithm as EvolutionaryAlgorithm
+import EvolutionaryAlgorithm
 
 test = EvolutionaryAlgorithm.PolynomialEvolutionaryAlgorithm(10)
 test.population.sort()

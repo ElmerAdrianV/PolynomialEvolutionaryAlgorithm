@@ -10,10 +10,10 @@ project_directory = os.path.abspath(os.path.join(script_directory, ".."))
 # Add the project directory to the Python path
 sys.path.append(project_directory)
 
-from AbstractClasses import AbstractGenerator
+from AbstractClasses.AbstractGenerator import AbstractGenerator
 from Roots import RootsGenerator
 from Coefficients import CoefficientsGenerator
-import Polynomial
+from Polynomials.Polynomial import Polynomial
 
 class PolynomialsGenerator(AbstractGenerator):
     def __init__(self, chromosome_type="Roots", heuristic_type="Random"):

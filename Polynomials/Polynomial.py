@@ -10,11 +10,11 @@ project_directory = os.path.abspath(os.path.join(script_directory, ".."))
 # Add the project directory to the Python path
 sys.path.append(project_directory)
 
-from AbstractClasses import AbstractPolynomial
-import HeuristicFunctions
+from AbstractClasses.AbstractPolynomial import AbstractPolynomial
+from HeuristicFunctions.HeuristicFunctions import HeuristicFunctions
 import numpy as np
 
-def Polynomial(AbstractPolynomial):
+class Polynomial(AbstractPolynomial):
     def __init__(self, heuristic_type, chromosome_type="Roots", chromosomes=None, degree=4, ):
         self.degree = degree
         self.chromosome_type = chromosome_type
