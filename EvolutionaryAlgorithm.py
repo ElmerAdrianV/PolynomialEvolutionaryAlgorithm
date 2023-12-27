@@ -22,14 +22,16 @@ class PolynomialEvolutionaryAlgorithm:
         self.best_fitness = 0
         self.best_polynomial = None
         self.best_type = None
+        self.chromosome_type = chromosome_type
+        self.heuristic_type = heuristic_type
         self.polynomial_generator = PolynomialsGenerator(chromosome_type,heuristic_type)
         pre_population = self.polynomial_generator.generates(n)
         for polynomial in pre_population:
             self.population.append([polynomial.global_fitness, polynomial.chromosomes, "Original"])
         
     def evaluate(self, chromosomes):
-        p = Polynomial(chromosomes)
-        return p.evaluate()
+        p = Polynomial(self.heuristic_type,self.chromosome_type,chromosomes)
+        return p.global_fitness
 
     def mutate(self, chromosomes):
         for i in range(4):
@@ -53,7 +55,7 @@ class PolynomialEvolutionaryAlgorithm:
                 type_new_chromosomes = "Mutation"
                 parent = random.choice(self.population)[1]
                 new_chromosomes = self.mutate(parent)
-            self.population.append([self.evaluate_poly(new_chromosomes), new_chromosomes, type_new_chromosomes ])
+            self.population.append([self.evaluate(new_chromosomes), new_chromosomes, type_new_chromosomes ])
         self.update_best()
 
     def update_best(self):
