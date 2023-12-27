@@ -88,5 +88,5 @@ class HeuristicFunctions:
         # the global fitness value:
         global_quality=(x_quality+y_quality)/2
             
-        return global_quality, x_quality,y_quality
+        return global_quality
         
