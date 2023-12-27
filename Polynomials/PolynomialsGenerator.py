@@ -16,7 +16,7 @@ from Coefficients.CoefficientsGenerator import CoefficientsGenerator
 from Polynomials.Polynomial import Polynomial
 
 class PolynomialsGenerator(AbstractGenerator):
-    def __init__(self, chromosome_type="Roots", heuristic_type="Random"):
+    def __init__(self, chromosome_type="Roots", heuristic_type="HVSymetry"):
         """
             Class generator of a population of polynomials with a given chromosome type and heuristic type
             Input:

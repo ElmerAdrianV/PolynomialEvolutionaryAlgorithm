@@ -21,7 +21,7 @@ from HeuristicFunctions.HeuristicFunctions import HeuristicFunctions
 import numpy as np
 
 class Polynomial(AbstractPolynomial):
-    def __init__(self, heuristic_type, chromosome_type="Roots", chromosomes=[], degree=4, ):
+    def __init__(self, heuristic_type="HVSymetry", chromosome_type="Roots", chromosomes=[], degree=4, ):
         self.degree = degree
         self.chromosome_type = chromosome_type
         self.chromosomes = chromosomes
@@ -34,10 +34,11 @@ class Polynomial(AbstractPolynomial):
         self.heuristic_type = heuristic_type
         self.heuristic_function = HeuristicFunctions(heuristic_type)
         self.global_fitness = 0
-        self.x_values = None
-        self.y_values = None
-        self.evaluate()
+        self.x_values = []
+        self.y_values = []
         self.obtain_graph()
+        self.evaluate()
+        
 
      
     # In mathematics, a the graph of a function 'f' is represented as a set of ordered pairs (x, y),
@@ -72,11 +73,11 @@ class Polynomial(AbstractPolynomial):
             upp_lim=15
         # Creates a list of 1000 evenly-spaced x-values between the two
         # specified limits:
-        x_values=np.linspace(low_lim,upp_lim, 1000)
-        y_values=[]
-        for x in x_values:
-            y_values.append(self.polynomial_function_evaluate(x))
-        return x_values,y_values
+        self.x_values=np.linspace(low_lim,upp_lim, 1000)
+        self.y_values=[]
+        for x in self.x_values:
+            self.y_values.append(self.polynomial_function_evaluate(x))
+        return self.x_values,self.y_values
     
     # Returns the result of evaluating the polynomial at the value
     # specified in the argument:
