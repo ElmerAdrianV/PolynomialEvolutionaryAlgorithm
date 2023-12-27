@@ -11,8 +11,8 @@ project_directory = os.path.abspath(os.path.join(script_directory, ".."))
 sys.path.append(project_directory)
 
 from AbstractClasses.AbstractGenerator import AbstractGenerator
-from Roots import RootsGenerator
-from Coefficients import CoefficientsGenerator
+from Roots.RootsGenerator import RootsGenerator
+from Coefficients.CoefficientsGenerator import CoefficientsGenerator
 from Polynomials.Polynomial import Polynomial
 
 class PolynomialsGenerator(AbstractGenerator):
@@ -23,7 +23,7 @@ class PolynomialsGenerator(AbstractGenerator):
                 chromosomeType: type of chromosome to use between the following options:
                     - "Roots"
                     - "Coefficients"
-                heuristicType: type of heuristic to use between the following options:
+                heuristic_type: type of heuristic to use between the following options:
                 
         """
         self.chromosome_type = chromosome_type
@@ -33,7 +33,7 @@ class PolynomialsGenerator(AbstractGenerator):
         elif chromosome_type == "Coefficients":
             self.chromosome_generator = CoefficientsGenerator()
         
-        self.heuristicType = heuristic_type
+        self.heuristic_type = heuristic_type
 
     def generates(self, count):
         """
