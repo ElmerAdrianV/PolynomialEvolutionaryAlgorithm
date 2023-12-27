@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Jun  5 09:30:25 2023
+
+@author: andre, elmeradrianv
+"""
 import sys
 import os
 
